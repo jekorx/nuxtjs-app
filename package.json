@@ -1,8 +1,8 @@
 {
-  "name": "nuxtapp",
+  "name": "nuxtjs-app",
   "version": "1.0.0",
   "description": "My neat Nuxt.js project",
-  "author": "wang_dgang",
+  "author": "jekorx",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
