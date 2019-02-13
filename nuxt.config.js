@@ -27,14 +27,15 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    'iview/dist/styles/iview.css'
+    // 'iview/dist/styles/iview.css'
   ],
 
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/iview'
+    '@/plugins/iview',
+    '@/plugins/axios'
   ],
 
   /*
@@ -42,16 +43,22 @@ module.exports = {
   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios',
-    '@nuxtjs/pwa'
+    '@nuxtjs/axios'
   ],
   /*
   ** Axios module configuration
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+    // baseURL: 'http://192.168.0.11/',
+    proxy: true
   },
-
+  proxy: {
+    '/nuojin': {
+      target: 'http://127.0.0.1:8080',
+      changeOrigin: true
+    }
+  },
   /*
   ** Build configuration
   */
@@ -59,7 +66,7 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
-    extend(config, ctx) {
+    extend (config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({

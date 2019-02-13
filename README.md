@@ -1,6 +1,6 @@
-# nuxtjs-app
+# nuxtapp
 
-> My flawless Nuxt.js project
+> My neat Nuxt.js project
 
 ## Build Setup
 
