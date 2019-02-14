@@ -1,12 +1,28 @@
 <template lang="pug">
   div
-    h2 test
-    nuxt-link(to="/test") to test
+    Row.row(type="flex" justify="center")
+      Col.col(span="16")
+        h3 Welcome to Nuxt.js auth example
+        div(v-if="!isAuth")
+          Button(type="success" @click="login") Login
+        div(v-else)
+          Button(type="info" @click="secret") Secret
+          | &nbsp;&nbsp;
+          Button(type="error" @click="logout") Logout
+      Col.left(span="16")
+        | User status:
+        Tag(v-if="isAuth" color="success") Logged in
+        Tag(v-else color="gray") Guest
 </template>
 <script>
+import { mapGetters, mapActions } from 'vuex'
+import { USER_LOGOUT } from '~/store/user'
 
 export default {
   name: 'Index',
+  computed: {
+    ...mapGetters('user', { isAuth: 'isAuth' })
+  },
   data () {
     return {
       axios: {},
@@ -14,16 +30,35 @@ export default {
     }
   },
   methods: {
-
+    ...mapActions('user', { USER_LOGOUT }),
+    login () {
+      this.$router.push('/login')
+    },
+    secret () {
+      this.$router.push('/secret')
+    },
+    logout () {
+      // 清空vuex中用户信息
+      this[USER_LOGOUT]()
+      // 路由跳转到首页
+      this.$router.push('/')
+    }
   }
 }
 </script>
 <style lang="stylus" scoped>
-div
+.row
   text-align center
-  border-bottom 1px solid #CCC
-h2
-  font-weight 500
-p
-  color red
+  padding-top 20px
+.col
+  background-color #e9ecef
+  padding 40px 20px
+  border-radius 6px
+.left
+  text-align left
+  padding-top 20px
+.ivu-tag
+  margin-left 6px
+h3
+  padding 10px
 </style>

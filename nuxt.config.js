@@ -10,7 +10,9 @@ module.exports = {
     title: pkg.name,
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'viewport', content: 'viewport-fit=cover,width=device-width,height=device-height,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no' },
+      { name: 'renderer', content: 'webkit' },
+      { 'http-equiv': 'X-UA-Compatible', content: 'IE=Edge,chrome=1' },
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
@@ -27,7 +29,7 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    // 'iview/dist/styles/iview.css'
+    'iview/dist/styles/iview.css'
   ],
 
   /*
@@ -50,7 +52,7 @@ module.exports = {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    // baseURL: 'http://192.168.0.11/',
+    // See '~/plugins/axios.js'
     proxy: true
   },
   proxy: {
@@ -59,6 +61,7 @@ module.exports = {
       changeOrigin: true
     }
   },
+
   /*
   ** Build configuration
   */

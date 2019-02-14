@@ -1,9 +1,14 @@
 <template lang="pug">
-  nuxt
+  div
+    Header
+    nuxt
 </template>
 <script>
+import Header from './header'
+
 export default {
-  name: 'Layout'
+  name: 'Layout',
+  components: { Header }
 }
 </script>
 <style lang="stylus">
@@ -12,4 +17,5 @@ body
   margin 0
   padding 0
   height 100%
+  font-size 14px
 </style>
