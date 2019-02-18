@@ -16,7 +16,7 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import { USER_LOGOUT } from '~/store/user'
+import { USER_SIGN } from '~/store/user'
 
 export default {
   name: 'Index',
@@ -30,7 +30,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('user', { USER_LOGOUT }),
+    ...mapActions('user', { USER_SIGN }),
     login () {
       this.$router.push('/login')
     },
@@ -39,7 +39,7 @@ export default {
     },
     logout () {
       // 清空vuex中用户信息
-      this[USER_LOGOUT]()
+      this[USER_SIGN]()
       // 路由跳转到首页
       this.$router.push('/')
     }

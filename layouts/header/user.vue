@@ -3,28 +3,30 @@
     .user
       Avatar(:src="info.avatar || require('~/assets/images/logo.png')")
       Badge.badge(dot)
-        span.name admin
+        span.name(v-text="info.nickName")
       Icon(:size="18" type="md-arrow-dropdown")
     DropdownMenu(slot="list")
+      nuxt-link(to="/icenter")
+        DropdownItem(name="icenter") 个人中心
       DropdownItem(name="message")
         | 消息中心
         Badge(style="margin-left: 10px" :count="10")
       DropdownItem(name="logout" @click.native="logout") 退出登录
 </template>
 <script>
-import { mapState, mapActions } from 'vuex'
-import { USER_LOGOUT } from '~/store/user'
+import { mapGetters, mapActions } from 'vuex'
+import { USER_SIGN } from '~/store/user'
 
 export default {
   name: 'User',
   computed: {
-    ...mapState('user', { info: 'info' })
+    ...mapGetters('user', { info: 'userInfo' })
   },
   methods: {
-    ...mapActions('user', { USER_LOGOUT }),
+    ...mapActions('user', { USER_SIGN }),
     logout () {
       // 清空vuex中用户信息
-      this[USER_LOGOUT]()
+      this[USER_SIGN]()
       // 路由跳转到首页
       this.$router.push('/')
     }

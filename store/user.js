@@ -1,12 +1,12 @@
-const Cookie = process.client ? require('js-cookie') : undefined
+import Cookie from 'js-cookie'
+import { Base64 } from 'js-base64'
 
 /**
  * 用户vuex状态
  */
 // 常量
 export const COOKIE_USER_INFO = 'INFO'
-export const USER_LOGIN = 'USER_LOGIN'
-export const USER_LOGOUT = 'USER_LOGOUT'
+export const USER_SIGN = 'USER_SIGN'
 
 export const state = () => ({
   info: null
@@ -14,31 +14,36 @@ export const state = () => ({
 
 export const getters = {
   // 用户信息是否为空
-  isAuth (state) {
-    return !!state.info
+  isAuth ({ info }) {
+    return !!info
+  },
+  // 用户信息
+  userInfo ({ info }) {
+    if (info) {
+      return JSON.parse(Base64.decode(info))
+    }
+    return {}
   }
 }
 
 export const mutations = {
-  [USER_LOGIN] (state, info) {
+  [USER_SIGN] (state, info = null) {
     // 将信息保存到state
     state.info = info
-  },
-  [USER_LOGOUT] (state) {
-    // state中info置为null
-    state.info = null
   }
 }
 
 export const actions = {
-  [USER_LOGIN] ({ commit }, info) {
-    // 将信息保存到cookie
-    Cookie && Cookie.set(COOKIE_USER_INFO, info)
-    commit(USER_LOGIN, info)
-  },
-  [USER_LOGOUT] ({ commit }) {
-    // 清空cookie
-    Cookie && Cookie.remove(COOKIE_USER_INFO, { path: '/' })
-    commit(USER_LOGOUT)
+  [USER_SIGN] ({ commit }, info = null) {
+    if (info) {
+      // 通过base64加密
+      info = Base64.encode(JSON.stringify(info))
+      // 将信息保存到cookie
+      Cookie.set(COOKIE_USER_INFO, info)
+    } else {
+      // 清空cookie
+      Cookie.remove(COOKIE_USER_INFO, { path: '/' })
+    }
+    commit(USER_SIGN, info)
   }
 }

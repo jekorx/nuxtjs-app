@@ -6,18 +6,8 @@
 </template>
 <script>
 export default {
-  name: 'Secret',
-  middleware: 'auth',
-  methods: {
-    test () {
-      this.$axios.$post('app/v1/prospectus/list', {
-        pageNum: 1,
-        pageSize: 2
-      }).then(res => {
-        console.log(res.data.list)
-      })
-    }
-  }
+  name: 'Test',
+  middleware: 'auth'
 }
 </script>
 <style lang="stylus" scoped>

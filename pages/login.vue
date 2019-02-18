@@ -14,16 +14,13 @@
             Button(@click="submit" type="primary") login
 </template>
 <script>
-import { mapState, mapActions } from 'vuex'
-import { USER_LOGIN } from '~/store/user'
+import { mapActions } from 'vuex'
+import { USER_SIGN } from '~/store/user'
 import md5 from 'js-md5'
 
 export default {
   name: 'Login',
   middleware: 'noAuth',
-  computed: {
-    ...mapState('user', { info: 'info' })
-  },
   data () {
     return {
       username: 'admin',
@@ -31,18 +28,17 @@ export default {
     }
   },
   methods: {
-    ...mapActions('user', { USER_LOGIN }),
+    ...mapActions('user', { USER_SIGN }),
     submit () {
       // 提交表单登录
       this.$axios.$post('sign/v1/in', {
         account: this.username,
         password: md5(this.password) // md5加密密码
-      }).then(res => {
-        const info = res.data
+      }).then(({ data }) => {
         // 结果保存到vuex
-        this[USER_LOGIN](info)
+        this[USER_SIGN](data)
         // 设置axios请求头
-        this.$axios.defaults.headers.ticket = info.token
+        this.$axios.defaults.headers.ticket = data.token
         // 页面跳转
         const { ref } = this.$route.query
         this.$router.push(ref || '/')
