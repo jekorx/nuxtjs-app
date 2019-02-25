@@ -22,10 +22,10 @@ export const actions = {
   nuxtServerInit ({ commit }, { req }) {
     let info = null
     // 初始化时判断是否存在cookie
-    if (req.headers.cookie) {
-      // 将cookie格式化
-      const parsed = cookieparser.parse(req.headers.cookie)
+    if (req && req.headers && req.headers.cookie) {
       try {
+        // 将cookie格式化
+        const parsed = cookieparser.parse(req.headers.cookie)
         // 获取保存用户信息的cookie（base64）
         info = parsed[COOKIE_USER_INFO]
       } catch (err) {

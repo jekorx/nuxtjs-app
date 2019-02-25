@@ -24,15 +24,17 @@ export default function ({ $axios, store: { getters }, req }) {
     // baseURL，服务端ajax请求数据需要设置ip地址和端口
     $axios.defaults.baseURL = IP + PREFIX
     // 获取token
-    try {
-      const parsed = cookieparser.parse(req.headers.cookie)
-      // 获取保存用户信息的cookie（base64）
-      token = parsed[COOKIE_USER_INFO]
-      token = Base64.decode(token)
-      token = JSON.parse(token).token
-    } catch (err) {
-      // No valid cookie found
-      process.server && console.log('server-axios-plugin', err)
+    if (req && req.headers && req.headers.cookie) {
+      try {
+        const parsed = cookieparser.parse(req.headers.cookie)
+        // 获取保存用户信息的cookie（base64）
+        token = parsed[COOKIE_USER_INFO]
+        token = Base64.decode(token)
+        token = JSON.parse(token).token
+      } catch (err) {
+        // No valid cookie found
+        process.server && console.log('server-axios-plugin', err)
+      }
     }
   } else {
     // client端相关配置
