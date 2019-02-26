@@ -1,21 +1,22 @@
 <template lang="pug">
-  Row(type="flex" justify="center")
-    Col.col(span="16")
-      template(v-for="(item, idx) in list")
-        Alert(:type="alertType[(page.ps * (page.pn - 1) + idx) % 4]")
+  .wrap
+    template(v-for="(item, idx) in list")
+      Alert.alert(
+        :type="alertType[(page.ps * (page.pn - 1) + idx) % 4]"
+        :closable="false")
+        template(slot="title")
           | {{ page.ps * (page.pn - 1) + idx + 1 }} : {{ item.title }}
-          template(slot="desc")
-            p(v-text="`${item.typeName} - ${item.collectNum} - ${item.goodNum} - ${item.shareNum} - ${item.watchNum}`")
-            p(v-text="item.createTime")
-      Page(
-        show-total
-        style="text-align: center"
-        :total="page.total"
-        :current="page.pn"
-        :page-size="page.ps"
-        @on-change="pageChange")
-    Col.col(span="16")
-      Button(type="primary" @click="test") Ajax Test
+        p(v-text="`${item.typeName} - ${item.collectNum} - ${item.goodNum} - ${item.shareNum} - ${item.watchNum}`")
+        p(v-text="item.createTime")
+    Pagination(
+      background
+      layout="total, prev, pager, next, jumper"
+      style="text-align: center"
+      :total="page.total"
+      :current-page="page.pn"
+      :page-size.sync="page.ps"
+      @current-change="pageChange")
+    Button(type="primary" @click="test") Ajax Test
 </template>
 <script>
 export default {
@@ -61,6 +62,9 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-.col
-  padding-top 20px
+.wrap
+  width 80%
+  margin 20px auto 0
+.alert
+  margin-bottom 10px
 </style>

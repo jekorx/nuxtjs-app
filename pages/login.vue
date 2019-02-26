@@ -1,17 +1,15 @@
 <template lang="pug">
-  Row(type="flex" justify="center")
-    Col.col(span="8")
-      Alert
-        Form(:label-width="80")
-          h3 Login
-          FormItem(label="username")
-            Input(v-model="username")
-              Icon(type="ios-person-outline" slot="prepend")
-          FormItem(label="password")
-            Input(v-model="password" type="password")
-              Icon(type="ios-lock-outline" slot="prepend")
-          FormItem(:label-width="0" style="text-align: center")
-            Button(@click="submit" type="primary") login
+  Alert.wrap(
+    center
+    :closable="false")
+    Form(label-width="80px")
+      h3 Login
+      FormItem(label="username")
+        Input(v-model="username")
+      FormItem(label="password")
+        Input(v-model="password" type="password")
+      FormItem(label-width="0px" style="text-align: center")
+        Button(@click="submit" type="primary") login
 </template>
 <script>
 import { mapActions } from 'vuex'
@@ -48,9 +46,9 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-.col
-  padding-top 20px
+.wrap
+  width 60%
+  margin 20px auto 0
 h3
-  text-align center
-  padding 20px 0
+  padding 10px
 </style>

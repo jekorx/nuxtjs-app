@@ -1,18 +1,20 @@
 <template lang="pug">
-  Row(type="flex" justify="center")
-    Col.col(span="16")
-      Alert(type="warning")
-        h3 This is a secure page!
+  Alert.wrap(
+    center
+    type="warning"
+    :closable="false")
+      h3 This is a secure page!
 </template>
 <script>
 export default {
-  name: 'Test',
+  name: 'Secret',
   middleware: 'auth'
 }
 </script>
 <style lang="stylus" scoped>
-.col
-  padding-top 20px
+.wrap
+  width 60%
+  margin 20px auto 0
 h3
-  padding 10px 0
+  padding 10px
 </style>

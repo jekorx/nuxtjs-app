@@ -29,15 +29,16 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    'iview/dist/styles/iview.css'
+    // 完整引入时需引入
+    // 'element-ui/lib/theme-chalk/index.css'
   ],
 
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/iview',
-    '@/plugins/axios'
+    '@/plugins/axios',
+    '@/plugins/element-ui'
   ],
 
   /*
@@ -69,6 +70,19 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
+    // 打包分析
+    // analyze: true,
+    babel: {
+      plugins: [
+        [
+          'component',
+          {
+            libraryName: 'element-ui',
+            styleLibraryName: 'theme-chalk'
+          }
+        ]
+      ]
+    },
     extend (config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {

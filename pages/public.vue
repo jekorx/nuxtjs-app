@@ -1,8 +1,8 @@
 <template lang="pug">
-  Row(type="flex" justify="center")
-    Col.col(span="16")
-      Alert(type="success")
-        h3 You should see this page without need to authentication!
+  Alert.wrap(
+    center
+    :closable="false")
+      h3 You should see this page without need to authentication!
 </template>
 <script>
 export default {
@@ -10,8 +10,9 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-.col
-  padding-top 20px
+.wrap
+  width 60%
+  margin 20px auto 0
 h3
-  padding 20px 0
+  padding 10px
 </style>

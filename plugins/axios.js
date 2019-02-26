@@ -29,8 +29,8 @@ export default function ({ $axios, store: { getters }, req }) {
         const parsed = cookieparser.parse(req.headers.cookie)
         // 获取保存用户信息的cookie（base64）
         token = parsed[COOKIE_USER_INFO]
-        token = Base64.decode(token)
-        token = JSON.parse(token).token
+        token = token && Base64.decode(token)
+        token = token && JSON.parse(token).token
       } catch (err) {
         // No valid cookie found
         process.server && console.log('server-axios-plugin', err)

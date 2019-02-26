@@ -1,18 +1,31 @@
 <template lang="pug">
-  div
-    Row.row(type="flex" justify="center")
-      Col.col(span="16")
-        h3 Welcome to Nuxt.js auth example
-        div(v-if="!isAuth")
-          Button(type="success" @click="login") Login
-        div(v-else)
-          Button(type="info" @click="secret") Secret
-          | &nbsp;&nbsp;
-          Button(type="error" @click="logout") Logout
-      Col.left(span="16")
-        | User status:
-        Tag(v-if="isAuth" color="success") Logged in
-        Tag(v-else color="gray") Guest
+  Alert.wrap(
+    center
+    :closable="false")
+    h3 Welcome to Nuxt.js auth example
+    div(v-if="!isAuth")
+      Button(
+        type="success"
+        @click="login") Login
+    div(v-else)
+      Button(
+        type="primary"
+        @click="secret") Secret
+      | &nbsp;&nbsp;
+      Button(
+        type="danger"
+        @click="logout") Logout
+    .status
+      | User status:
+      | &nbsp;&nbsp;
+      Tag(
+        v-if="isAuth"
+        size="small"
+        type="success") Logged in
+      Tag(
+        v-else
+        size="small"
+        type="warning") Guest
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
@@ -22,12 +35,6 @@ export default {
   name: 'Index',
   computed: {
     ...mapGetters('user', { isAuth: 'isAuth' })
-  },
-  data () {
-    return {
-      axios: {},
-      testNum: 123
-    }
   },
   methods: {
     ...mapActions('user', { USER_SIGN }),
@@ -47,18 +54,12 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-.row
+.wrap
+  width 60%
+  margin 20px auto 0
   text-align center
-  padding-top 20px
-.col
-  background-color #e9ecef
-  padding 40px 20px
-  border-radius 6px
-.left
-  text-align left
-  padding-top 20px
-.ivu-tag
-  margin-left 6px
 h3
   padding 10px
+.status
+  padding 20px 0 10px
 </style>

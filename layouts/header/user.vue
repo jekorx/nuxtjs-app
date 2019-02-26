@@ -1,17 +1,17 @@
 <template lang="pug">
-  Dropdown
+  Dropdown.layout-user(
+    size="small"
+    @command="clickHandler")
     .user
-      Avatar(:src="info.avatar || require('~/assets/images/logo.png')")
-      Badge.badge(dot)
+      img(:src="info.avatar || require('~/assets/images/logo.png')")
+      Badge.badge(is-dot)
         span.name(v-text="info.nickName")
-      Icon(:size="18" type="md-arrow-dropdown")
-    DropdownMenu(slot="list")
-      nuxt-link(to="/icenter")
-        DropdownItem(name="icenter") 个人中心
-      DropdownItem(name="message")
-        | 消息中心
-        Badge(style="margin-left: 10px" :count="10")
-      DropdownItem(name="logout" @click.native="logout") 退出登录
+      i.el-icon-caret-bottom
+    DropdownMenu(slot="dropdown")
+      DropdownItem.item(command="/icenter") 个人中心
+      DropdownItem.item(command="/message")
+        Badge(:value="10") 消息中心
+      DropdownItem.item(command="/logout") 退出登录
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
@@ -24,20 +24,36 @@ export default {
   },
   methods: {
     ...mapActions('user', { USER_SIGN }),
-    logout () {
-      // 清空vuex中用户信息
-      this[USER_SIGN]()
-      // 路由跳转到首页
-      this.$router.push('/')
+    clickHandler (cmd) {
+      if (cmd === '/icenter') {
+        this.$router.push(cmd)
+      } else if (cmd === '/logout') {
+        // 清空vuex中用户信息
+        this[USER_SIGN]()
+        // 路由跳转到首页
+        this.$router.push('/')
+      }
     }
   }
 }
 </script>
 <style lang="stylus" scoped>
+.layout-user
+  float right
+  margin-right 16px
 .user
-  padding-right 6px
+  padding-top 11px
   cursor pointer
-  .ivu-icon
+  img
+    width 40px
+    height 40px
+    vertical-align middle
+    margin-right 4px
+    border-radius 100%
+    background-color rgba(144,147,153,.4)
+    padding 2px
+    box-sizing border-box
+  .el-icon-caret-bottom
     color #FFF
     margin-left 10px
 .badge
@@ -47,4 +63,7 @@ export default {
   padding 0 6px
 .name
   color #FFF
+.el-dropdown-menu
+  .item
+    padding 6px 26px
 </style>

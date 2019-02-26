@@ -1,28 +1,30 @@
 <template lang="pug">
-  Menu(mode="horizontal" theme="dark" :active-name="activited")
+  Menu(
+    mode="horizontal"
+    background-color="#545c64"
+    text-color="#fff"
+    active-text-color="#ffd04b"
+    :default-active="activited"
+    @select="redirect")
     .layout-logo Nuxt.js
-    MenuItem(name="/")
-      nuxt-link(to="/")
-        Icon(type="md-home")
-        | Home
-    MenuItem(name="/public")
-      nuxt-link(to="/public")
-        Icon(type="md-cube")
-        | Public
-    MenuItem(name="/secret")
-      nuxt-link(to="/secret")
-        Icon(type="md-lock")
-        | Secret
-    MenuItem(name="/list")
-      nuxt-link(to="/list")
-        Icon(type="md-list")
-        | List
-    .layout-nav
-      MenuItem(v-if="!isAuth" name="/login")
-        nuxt-link(to="/login")
-          Icon(type="md-log-in")
-          | Login
-      User(v-else)
+    MenuItem(index="/")
+      i.el-icon-menu
+      | Home
+    MenuItem(index="/public")
+      i.el-icon-goods
+      | Public
+    MenuItem(index="/secret")
+      i.el-icon-warning
+      | Secret
+    MenuItem(index="/list")
+      i.el-icon-tickets
+      | List
+    MenuItem.layout-nav(
+      v-if="!isAuth"
+      index="/login")
+      i.el-icon-info
+      | Login
+    User(v-else)
 </template>
 <script>
 import { mapGetters } from 'vuex'
@@ -46,21 +48,15 @@ export default {
   },
   created () {
     this.activited = this.$route.path
+  },
+  methods: {
+    redirect (index) {
+      this.$router.push(index)
+    }
   }
 }
 </script>
 <style lang="stylus" scoped>
-.ivu-menu-item
-  padding 0
-  a
-    color rgba(255,255,255,.7)
-    display block
-    padding 0 20px
-  &:hover
-  &.ivu-menu-item-active
-  &.ivu-menu-item-selected
-    a
-      color #FFF
 .layout-logo
   height 30px
   padding 0 16px
@@ -74,8 +70,8 @@ export default {
   position relative
   top 15px
   left 20px
-  margin-right 20px
-.layout-nav
+  margin-right 40px
+.el-menu-item.layout-nav
   float right
   margin-right 20px
 </style>
