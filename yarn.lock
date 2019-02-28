@@ -8160,6 +8160,14 @@ void-elements@^2.0.1:
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-2.0.1.tgz#c066afb582bb1cb4128d60ea92392e94d5e9dbec"
   integrity sha1-wGavtYK7HLQSjWDqkjkulNXp2+w=
 
+vue-carousel-card@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/vue-carousel-card/-/vue-carousel-card-0.2.1.tgz#51e6f9dbc5217accf9790e707b95f7f3ddd68ad5"
+  integrity sha512-M7w3bTy9Veib+mVf5LFoP9KEvsVsgE95VkRMb2mX5ZbTcckFULxMgg9NbrqqiajnDMMOU60ktewlgdujmYArJw==
+  dependencies:
+    resize-observer-polyfill "^1.5.0"
+    throttle-debounce "^1.0.1"
+
 vue-eslint-parser@^4.0.2:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/vue-eslint-parser/-/vue-eslint-parser-4.0.3.tgz#80cf162e484387b2640371ad21ba1f86e0c10a61"

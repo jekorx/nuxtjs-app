@@ -38,7 +38,8 @@ module.exports = {
   */
   plugins: [
     '@/plugins/axios',
-    '@/plugins/element-ui'
+    '@/plugins/element-ui',
+    '@/plugins/vue-carousel-card'
   ],
 
   /*
