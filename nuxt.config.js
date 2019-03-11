@@ -33,6 +33,15 @@ module.exports = {
     // 'element-ui/lib/theme-chalk/index.css'
   ],
 
+  /**
+   * 应用的主机和端口配置
+   */
+  server: {
+    // 端口
+    // port: 8000
+    // host: '0.0.0.0'
+  },
+
   /*
   ** Plugins to load before mounting the App
   */
