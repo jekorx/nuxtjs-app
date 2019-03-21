@@ -2,6 +2,7 @@ const pkg = require('./package')
 
 module.exports = {
   mode: 'universal',
+
   // 路由基础路径，通过/app/访问，则base设为/app/
   router: {
     base: '/'
@@ -13,9 +14,9 @@ module.exports = {
     title: pkg.name,
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'viewport-fit=cover,width=device-width,height=device-height,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no' },
       { name: 'renderer', content: 'webkit' },
       { 'http-equiv': 'X-UA-Compatible', content: 'IE=Edge,chrome=1' },
+      { name: 'viewport', content: 'viewport-fit=cover,width=device-width,height=device-height,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no' },
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
