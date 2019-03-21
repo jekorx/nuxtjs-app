@@ -2,7 +2,10 @@ const pkg = require('./package')
 
 module.exports = {
   mode: 'universal',
-
+  // 路由基础路径，通过/app/访问，则base设为/app/
+  router: {
+    base: '/'
+  },
   /*
   ** Headers of the page
   */
