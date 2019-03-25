@@ -5,7 +5,7 @@
         :type="alertType[(page.pageSize * (page.pageNum - 1) + idx) % 4]"
         :closable="false")
         template(slot="title")
-          | {{ page.ps * (page.pageNum - 1) + idx + 1 }} : {{ item.title }}
+          | {{ page.pageSize * (page.pageNum - 1) + idx + 1 }} : {{ item.title }}
         p(v-text="`${item.typeName} - ${item.collectNum} - ${item.goodNum} - ${item.shareNum} - ${item.watchNum}`")
         p(v-text="item.createTime")
     Pagination(
