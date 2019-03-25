@@ -1,14 +1,14 @@
 import qs from 'qs'
-const COOKIE_USER_INFO = process.server ? require('~/store/user').COOKIE_USER_INFO : undefined
 const Base64 = process.server ? require('js-base64').Base64 : undefined
 const cookieparser = process.server ? require('cookieparser') : undefined
+const COOKIE_USER_INFO = process.server ? require('~/store/user').COOKIE_USER_INFO : undefined
 
 /**
  * axios相关配置（需要区分server和client）
  * https://axios.nuxtjs.org/usage
  */
 // ip，服务端使用
-const IP = 'http://127.0.0.1:8080'
+const IP = 'http://127.0.0.1:8083'
 // 请求前缀
 const PREFIX = '/nuojin/'
 
@@ -33,7 +33,7 @@ export default function ({ $axios, store: { getters }, req }) {
         token = token && JSON.parse(token).token
       } catch (err) {
         // No valid cookie found
-        process.server && console.log('server-axios-plugin', err)
+        console.log('server-axios-plugin', err)
       }
     }
   } else {
