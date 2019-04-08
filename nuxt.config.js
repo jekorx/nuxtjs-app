@@ -36,6 +36,8 @@ module.exports = {
   css: [
     // 完整引入时需引入
     // 'element-ui/lib/theme-chalk/index.css'
+    // 引入vue-carousel-card样式
+    'vue-carousel-card/styles/index.css'
   ],
 
   /**
